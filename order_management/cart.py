@@ -1,7 +1,9 @@
 from .product import Product
 from .stock import Stock
 
+
 class Cart:
+
     """Represents a cart with a list of products and quantity
 
     Attributes:
@@ -21,9 +23,9 @@ class Cart:
 
         Returns: None
         """
-        #TODO: Make sure the quantity is valid (> 0 and <= to the quantity in the stock)
-        #TODO: If the product was already in the cart, increment the quantity        
-        #TODO: After the checks, add the product to the dictionary
+        # TODO: Make sure the quantity is valid (> 0 and <= to the quantity in the stock)
+        # TODO: If the product was already in the cart, increment the quantity
+        # TODO: After the checks, add the product to the dictionary
         product_list = self.stock.products  
         current_quantity = 0
         if productCode in self.products:
@@ -36,8 +38,6 @@ class Cart:
                     product.quantity -= quantity
                 else:
                     print("Invalid quantity")
-
-       
 
     def __str__(self) -> str:
         """String representation of the cart
@@ -56,8 +56,7 @@ class Cart:
                     product_string_list.append(product_string)
 
         return f"Cart: {product_string_list}, Total Cart Price: {total_cart_price}"
-    
-        
+
     def remove(self, code):
         """
         Removes a specific product from the cart """

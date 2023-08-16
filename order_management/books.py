@@ -40,23 +40,25 @@ class BookRecords:
 
         position = 0
 
+        records_str = ""
+
         for transaction in self.transactions:
             position = position + 1
-
-            records_str = "|{:<4}|{:<20}|{:<15}|{:<15}|{:<15}|{:<15}|".format(position,
+            # time_ = datetime.strptime(transaction.timestamp, "%d/%m/%Y %H:%M:%S")
+            records_str += "|{:<4}|{:<20}|{:<15}|{:<15}|{:<15}|{:<15}|".format(position,
                                                                                transaction.timestamp,
                                                                                transaction.customerID,
                                                                                transaction.quantity,
                                                                                transaction.purchase_price,
                                                                                transaction.prescriptionID)
-           
+            records_str+="\n"
                                                                         
 
             # transaction_str = f"{position} | {transaction.timestamp} | {transaction.customerID} | {transaction.quantity} | {transaction.purchase_price} | {transaction.prescriptionID}"
             # records_str = records_str + transaction_str + "\n"
 
  
-        return records_str + "\n" + "-"*91
+        return records_str + "-"*91
     
 
 
