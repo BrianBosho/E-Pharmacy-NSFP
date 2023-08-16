@@ -55,8 +55,14 @@ class Menu:
                 while(add_to_cart):
                     print("select product")
                     list_counter = 1
+
+                    print("-"*72)
                     for product in self.stock.products:
-                        print(f"{list_counter}.  {product.name} | {product.price}  | {product.quantity}")
+
+                        print("|{:<15} | {:<15} | {:<15} | {:<15} |".format(list_counter, product.name, product.price, product.quantity))
+                        print("-"*72)
+
+                        
                         list_counter += 1           
                 
                     product_choice = input("select product by number: ")            
