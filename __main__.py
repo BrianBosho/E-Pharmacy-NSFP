@@ -35,7 +35,7 @@ if __name__ == '__main__':
     books = BookRecords.load(sales_file)
 
     # create an instance of the menu
-    menu = Menu(stock, profiles, pharmacist, sales_file, prescription_file, stock_file)
+    menu = Menu(stock, profiles, pharmacist, sales_file, prescription_file, stock_file, wrap)
 
     # TODO: Using a while loop, show the menu to the user and guide them through the app
     app_running = True

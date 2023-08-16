@@ -12,7 +12,7 @@ class Menu:
         prescriptions_file: path to the file containing the prescriptions.
         stock_file: path to the file containing the stock data
     """
-    def __init__(self, stock: Stock, profiles: UserManagement, pharmacist: User, records_file: str, prescriptions_file: str, stock_file: str) -> None:
+    def __init__(self, stock: Stock, profiles: UserManagement, pharmacist: User, records_file: str, prescriptions_file: str, stock_file: str, wrap:Wrapper) -> None:
         self.stock = stock
         self.profiles = profiles
         self.pharmacist = pharmacist
@@ -21,6 +21,7 @@ class Menu:
         self.records_file = records_file
         self.prescriptions_file = prescriptions_file
         self.stock_file = stock_file
+        self.wrap = wrap
 
     #TODO: Create all the necessary functions/method to create and manage the menu using the
     # available variables and all the attributes of the class
@@ -42,6 +43,7 @@ class Menu:
 
 
     def order_menu(self):
+        default_customerID = "ebra"
         order_menu = True
         while(order_menu):
             print("1. Adding to a cart")
@@ -117,6 +119,8 @@ class Menu:
                 choice=input("confirm purchase? (y/n): ")
                 if choice == "y":
                     print("purchase confirmed")
+                    self.wrap.checkout(self.cart, default_customerID)
+                    self.wrap.dump(self.records_file)
                     self.cart.clear_purchased()
                 elif choice == "n":
                     print("purchase cancelled")

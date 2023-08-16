@@ -34,7 +34,12 @@ class Prescription:
         """
         #TODO: Implement the function
         # read items from medications list and check if the product is in the prescription and the quantity
-        return NotImplemented
+        meds = self.Medications
+        # find the products in the prescription
+        for med in meds:
+            if med['name'] == product.Name and med['quantity'] == quantity:
+                return True
+        return False
         
     def markComplete(self, product: Product):
         """Mark a product's sale complete in the prescriptions file
@@ -45,8 +50,12 @@ class Prescription:
         Returns: None
         """
         #TODO: Change the value "ProcessedStatus" of the relevant product to True
+        meds = self.Medications
+        for med in meds:
+            if med['name'] == product.Name:
+                med['ProcessedStatus'] = True
 
-        return NotImplemented
+        # return NotImplemented
 
     def dump(self, outfile: str):
         """Dumps the updated prescription to the specified file
@@ -57,10 +66,27 @@ class Prescription:
         Returns: None
         """
         #TODO: Read the output file (safely). 
+        with open(outfile, 'r') as file:
+            data = json.load(file)
 
         #TODO: Update the prescription that is being edited in the loaded data
+        #identify the prescription to be updated
+        for item in data:
+            if item['PrescriptionID'] == self.PrescriptionID:
+                item = {
+                    "DoctorName": self.DoctorName,
+                    "PrescriptionID": self.PrescriptionID,
+                    "Medications": self.Medications,
+                    "CustomerID": self.CustomerID,
+                    "Date": self.Date
+                    
+                }
+                break
+        
 
         #TODO: Save the updated object
+        with open(outfile, 'w') as file:
+            json.dump(data, file)
     
     @classmethod
     def get(cls, infile: str, id: str):
@@ -74,3 +100,10 @@ class Prescription:
         """
         #TODO: Load the file and find the object with the relevant ID
         #TODO: Return the relevant prescription
+        with open(infile, 'r') as file:
+            data = json.load(file)
+        for item in data:
+            if item['PrescriptionID'] == id:
+                return item
+        return None
+        
