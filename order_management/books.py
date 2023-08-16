@@ -27,13 +27,36 @@ class BookRecords:
         # |      # | Date                | Customer   | Medication | Quantity | Purchase Price | Prescription |
         # |      1 | 2023-06-03 21:23:25 | doe        | Quinine    |        3 |       1400 RWF | PHA1         |
 
+
+        print("-"*91)
+        print("|{:<4}|{:<20}|{:<15}|{:<15}|{:<15}|{:<15}|".format("#", 
+                                                                    "Date", 
+                                                                    "Customer", 
+                                                            
+                                                                    "Quantity",
+                                                                    "Purchase Price",
+                                                                    "Prescription"))
+        print("-"*91)
+
         position = 0
-        records_str = ""
+
         for transaction in self.transactions:
             position = position + 1
-            transaction_str = f"{position} | {transaction.timestamp} | {transaction.customerID} | {transaction.quantity} | {transaction.purchase_price} | {transaction.prescriptionID}"
-            records_str = records_str + transaction_str + "\n"
-        return records_str
+
+            records_str = "|{:<4}|{:<20}|{:<15}|{:<15}|{:<15}|{:<15}|".format(position,
+                                                                               transaction.timestamp,
+                                                                               transaction.customerID,
+                                                                               transaction.quantity,
+                                                                               transaction.purchase_price,
+                                                                               transaction.prescriptionID)
+           
+                                                                        
+
+            # transaction_str = f"{position} | {transaction.timestamp} | {transaction.customerID} | {transaction.quantity} | {transaction.purchase_price} | {transaction.prescriptionID}"
+            # records_str = records_str + transaction_str + "\n"
+
+ 
+        return records_str + "\n" + "-"*91
     
 
 
@@ -51,16 +74,16 @@ class BookRecords:
         prescription_str = ""
         position =0
 
-        print("-"*54)
-        print("|{:<15} | {:<15} | {:15} |".format("Position", "PrescriptionID", "Purchase Price"))
-        print("-"*54)
+        print("-"*43)
+        print("|{:<4} | {:<15} | {:15} |".format("#", "PrescriptionID", "Purchase Price"))
+        print("-"*43)
 
         for sale in self.transactions:
             if sale.prescriptionID != None:
                 position = position+1
         
-                print("|{:<15} | {:<15} | {:15} |".format(position, sale.prescriptionID, sale.purchase_price))
-                print("-"*54)
+                print("|{:<4} | {:<15} | {:15} |".format(position, sale.prescriptionID, sale.purchase_price))
+                print("-"*43)
            
         return prescription_str
 
